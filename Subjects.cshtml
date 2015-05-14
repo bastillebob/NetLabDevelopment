@@ -1,0 +1,61 @@
+﻿@{
+    Layout = "~/Shared/_Layout.cshtml";
+
+    var db = Database.Open("Main") ; 
+    var selectQueryString = "SELECT * FROM Subject"; 
+    var data = db.Query(selectQueryString); 
+
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+    </head>
+    <body>
+      <h3>Subjects</h3>
+   <table>
+       <thead>
+           <tr>
+               <th>ID</th>
+               <th>First Name</th>
+               <th>Last Name</th>
+               <th>Age</th>
+               <th>Gender</th>
+               <th>Email</th>
+               <th>Race</th>
+               <th>Country</th>
+               <th>State / Province</th>
+               <th>User Defined 1</th>
+               <th>User Defined 2</th>
+               <th>User Defined 3</th>
+
+           </tr>
+       </thead>
+       <tbody>
+           @foreach(var row in db.Query(selectQueryString)){
+            <tr>
+               <td>@row.Id</td>
+               <td>@row.FName</td>
+               <td>@row.LName</td>
+               <td>@row.Age</td>
+               <td>@row.Gender</td>
+               <td>@row.Email</td>
+               <td>@row.Race</td>
+               <td>@row.Country</td>
+               <td>@row.StateProvince</td>
+               <td>@row.UserDefined1</td>
+               <td>@row.UserDefined2</td>
+               <td>@row.UserDefined3</td>
+
+            </tr>
+           }
+       </tbody>
+   </table>
+
+
+
+    </body>
+</html>

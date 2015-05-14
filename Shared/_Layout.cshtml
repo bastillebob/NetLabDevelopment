@@ -1,0 +1,176 @@
+﻿@{
+}
+ 
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>Net/Lab</title>
+        <link rel="stylesheet" type="text/css" href="~/Shared/_Style.css">
+        <style>
+
+            #navcontainer {
+                margin: 0;
+                padding: 0 0 0 0px;
+            }
+
+            #navcontainer UL {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                border: none;
+            }
+
+            #navcontainer LI {
+                display: block;
+                margin: 0;
+                padding: 0;
+                float: left;
+                width: 16.66%;
+            }
+
+            #navcontainer A {
+                color: #F2F3F4;
+                display: block;
+                width: auto;
+                text-decoration: none;
+                background: #006633;
+                margin: 0;
+                padding: 2px 10px;
+                border-left: 1px solid #fff;
+                border-top: 1px solid #fff;
+                border-right: 1px solid #aaa;
+            }
+
+            #navcontainer A:hover, #navcontainer A:active { 
+                background: #66A385; 
+
+            }
+
+            #navcontainer A.active:link, #navcontainer A.active:visited {
+                position: relative;
+                z-index: 102;
+                background: #BBBBBB;
+                font-weight: bold;
+            }
+
+            #subnav {
+                position: relative;
+                top: -1px;
+                z-index: 101;
+                margin: 0;
+                padding: 0px 0 3px 0;
+                background: #BBBBBB;
+                border-top: 1px solid #fff;
+                border-bottom: 1px solid #aaa;
+            }
+
+            #subnav UL {
+                list-style: none;
+                margin: 1px 0 0px 13px;
+                padding: 0px;
+                border-right: 1px solid #fff;
+                border-left: 1px solid #aaa;
+            }
+
+            #subnav LI {
+                position: relative;
+                z-index: 102;
+                display: block;
+                margin: 0;
+                padding: 0;
+                float: left;
+                width: auto;
+            }
+
+            #subnav A {
+                color: #fff;
+                display: block;
+                width: auto;
+                text-decoration: none;
+                margin: 0;
+                padding: 2px 12px 2px 10px;
+            }
+
+            #subnav A:hover, #subnav A:active { 
+                color: #444; 
+            }
+
+            #subnav A.active:link, #subnav A.active:visited { 
+                color: #444; 
+            }
+
+            #subnav BR, #navcontainer BR { 
+                clear: both; 
+            }
+           
+ 
+            body {
+                margin-left: 20%;
+                margin-right: 20%;
+                padding-top: 50px;
+                padding-bottom: 25px;
+                background-color: #F2F3F4;
+            }
+
+            footer {
+                background: #006633;
+                color: #fff;
+            }
+
+            h1 {
+                text-align: center;
+            }
+
+            p {
+                font-family: Georgia, 'Times New Roman', Times, serif;
+                font-size: 14px;
+                line-height: 150%;
+            }
+            
+            input, select, textarea {
+                max-width: 280px;
+            }
+
+            A:link {
+                color: blue;
+ 	            text-decoration: underline;
+            }
+
+            A:visited {
+	            color: purple;
+	            text-decoration: underline;
+            }
+
+            A:active {
+                color: red;
+                text-decoration: underline;
+            }
+
+        </style>
+
+    </head>
+
+    <body>
+        <div id="navcontainer">
+            <img src="~/Images/NetLab_logo.png" width="200" alt="CSN Logo"/>
+            <ul id="navlist">
+                <li><a href="../Default.cshtml">Main</a></li>
+                <li><a href="../Experiments.cshtml">Experiments</a></li>
+                <li><a href="../Subjects.cshtml">Subjects</a></li>
+                <li><a href="../MTurk.cshtml">MTurk</a></li>
+                <li><a href="../Data.cshtml">Data</a></li>
+                <li><a href="../Settings.cshtml">Settings</a></li>
+            </ul>
+        </div>
+        <br />
+
+        @RenderBody()
+
+        <br />
+        <footer>
+            This is the footer telling you that today is @DateTime.Now.DayOfWeek
+        </footer>
+    </body>
+</html>

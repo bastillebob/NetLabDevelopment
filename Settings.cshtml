@@ -1,0 +1,40 @@
+﻿ @{  Layout = "~/Shared/_Layout.cshtml";
+
+    var db = Database.Open("Main") ; 
+    var selectQueryString = "SELECT * FROM Setting"; 
+    var data = db.Query(selectQueryString); 
+
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+    </head>
+    <body>
+      <h3>Settings</h3>
+   <table>
+       <thead>
+           <tr>
+               <th>ID</th>
+               <th>Name</th>
+               <th>Value</th>
+            </tr>
+       </thead>
+       <tbody>
+           @foreach(var row in db.Query(selectQueryString)){
+            <tr>
+               <td>@row.Id</td>
+               <td>@row.Name</td>
+               <td>@row.Value</td>
+            </tr>
+           }
+       </tbody>
+   </table>
+
+
+
+    </body>
+</html>
