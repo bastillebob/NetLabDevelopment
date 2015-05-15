@@ -1,0 +1,116 @@
+﻿@{
+  
+    Layout = "~/Shared/_Layout.cshtml";
+
+    var db = Database.Open("Main");
+    var FName = Request.Form["FName"];
+    var LName = Request.Form["LName"];
+    var Gender = Request.Form["Gender"];
+    var Email = Request.Form["Email"];
+    var Age = Request.Form["Age"];
+    var Race = Request.Form["Race"];
+    var Country = Request.Form["Country"];
+    var StateProvince = Request.Form["StateProvince"];
+    var MTurkID = Request.Form["MTurkID"];
+    var UserDefined1 = Request.Form["UserDefined1"];
+    var UserDefined2 = Request.Form["UserDefined2"];
+    var UserDefined3 = Request.Form["UserDefined3"];
+
+    if (IsPost) {
+        if(ModelState.IsValid) {
+            var insertQuery = "INSERT INTO Subject (Fname, LName, Gender, Email, Age, Race, Country, StateProvince, MTurkID, UserDefined1, UserDefined2, Userdefined3) " +
+                "VALUES (@0, @1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11)";
+            db.Execute(insertQuery, FName, LName, Gender, Email, Age, Race, Country, StateProvince, MTurkID, UserDefined1, UserDefined2, UserDefined3);
+            Response.Redirect("~/Subjects");
+        }
+    }
+    
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <style type="text/css">
+            label {float:left; width: 8em; text-align: right;
+            margin-right: 0.5em;}
+            fieldset {padding: 1em; border: 1px solid; width: 50em;}
+            legend {padding: 2px 4px; border: 1px solid; font-weight:bold;}
+        </style>
+        <title></title>
+    </head>
+    <body>
+         <form method="post" action="">
+           <fieldset>
+             <legend>Add Subject</legend>
+               <div>
+               <label>First Name:</label>
+               <input name="FName" type="text" size="50" value="@FName" />
+             </div>
+             <div>
+               <label>Last Name:</label>
+               <input name="LName" type="text" size="50" value="@LName" />
+             </div>
+             <div>
+               <label>Gender:</label>
+                 <select name="Gender">
+                     <option value="@Gender"></option>
+                     <option value="@Gender">Male</option>
+                     <option value="@Gender">Female</option>
+                </select>
+             </div>
+               <div>
+               <label>Email:</label>
+               <input name="Email" type="email" size="50" value="@Email" />
+             </div>
+             <div>
+               <label>Age:</label>
+               <input name="Age" type="number" size="2" min="0" max="120" value="@Age" />
+             </div>
+             <div>
+               <label>Race:</label>
+                 <select name="Race">
+                     <option value="@Race"></option>
+                     <option value="@Race">American Indian or Alaska Native</option>
+                     <option value="@Race">Asian</option>
+                     <option value="@Race">Black or African American</option>
+                     <option value="@Race">Hispanic or Latino</option>
+                     <option value="@Race">Native Hawaiian or Other Pacific Islander </option>
+                     <option value="@Race">White</option>
+                     <option value="@Race">Other</option>
+                </select>
+             </div>
+             <div>
+               <label>Country:</label>
+               <input name="Country" type="text" size="50" value="@Country" />
+             </div>
+             <div>
+               <label>State or Province:</label>
+               <input name="StateProvince" type="text" size="50" value="@StateProvince" />
+             </div>
+             <div>
+               <label>MTurk ID:</label>
+               <input name="MTurkID" type="text" size="50" value="@MTurkID" />
+             </div>
+             <div>
+               <label>User Defined 1:</label>
+               <input name="UserDefined1" type="text" size="50" value="@UserDefined1" />
+             </div>
+             <div>
+               <label>User Defined 2:</label>
+               <input name="UserDefined2" type="text" size="50" value="@UserDefined2" />
+             </div>
+             <div>
+               <label>User Defined 3:</label>
+               <input name="UserDefined3" type="text" size="50" value="@UserDefined3" />
+             </div>
+
+             <div>
+               <label>&nbsp;</label>
+               <input type="submit" value="Insert" class="submit" />
+             </div>
+           </fieldset>
+         </form>        
+    </body>
+</html>

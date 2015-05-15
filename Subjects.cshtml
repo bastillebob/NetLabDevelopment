@@ -12,10 +12,12 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title></title>
+        <title>Subjects</title>
     </head>
     <body>
       <h3>Subjects</h3>
+      <a href="InsertSubject.cshtml">Add New Subject</a>
+      <br><br>
    <table>
        <thead>
            <tr>
@@ -28,6 +30,7 @@
                <th>Race</th>
                <th>Country</th>
                <th>State / Province</th>
+               <th>MTurk ID</th>
                <th>User Defined 1</th>
                <th>User Defined 2</th>
                <th>User Defined 3</th>
@@ -46,6 +49,7 @@
                <td>@row.Race</td>
                <td>@row.Country</td>
                <td>@row.StateProvince</td>
+               <td>@row.MTurkID</td>
                <td>@row.UserDefined1</td>
                <td>@row.UserDefined2</td>
                <td>@row.UserDefined3</td>
