@@ -11,16 +11,6 @@ Layout = "~/Shared/_Layout.cshtml";
 
     var Subject = db.QuerySingle("SELECT * FROM Subject WHERE ID = @0", SubjectId);
   
-    if( IsPost && !SubjectId.IsEmpty()) {
-
-		var selectChildRecords = "SELECT FROM SubjectNote WHERE SubjectID=@0";
-		db.Execute(selectChildRecords, SubjectId);
-		if(selectChildRecords.IsEmpty()) {
-		
-		Response.Redirect("~/SubjectNotesWithErrorMsg");	
-		}
-		}
-		
 	if( IsPost && !SubjectId.IsEmpty()) {
 
 		var deleteQueryString = "DELETE FROM Subject WHERE Id=@0";

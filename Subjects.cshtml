@@ -45,7 +45,7 @@
             <tr>
 				<td><a href="@Href("SubjectNotes", row.Id)"><button>Notes</button></a></td>
 				<td><a href="@Href("UpdateSubject", row.Id)"><button>Edit</button></a></td>
-				<td><a href="@Href("~/DeleteSubject", row.Id)"><button>Delete</button></a></td>
+				<td><a href="@Href("DeleteSubject", row.Id)"><button>Delete</button></a></td>
 				<td>@row.Id</td>
 				<td>@row.FName</td>
 				<td>@row.LName</td>
@@ -62,9 +62,6 @@
             </tr>
            }
        </tbody>
-   </table>
-
-
-
+	</table>
     </body>
 </html>
