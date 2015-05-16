@@ -16,11 +16,12 @@
     </head>
     <body>
       <h3>Subjects</h3>
-      <a href="InsertSubject.cshtml">Add New Subject</a>
+      <a href="~/InsertSubject">Add New Subject</a>
       <br><br>
    <table>
        <thead>
            <tr>
+               <th> </th>
                <th>ID</th>
                <th>First Name</th>
                <th>Last Name</th>
@@ -40,6 +41,7 @@
        <tbody>
            @foreach(var row in db.Query(selectQueryString)){
             <tr>
+               <td><a href="@Href("UpdateSubject", row.Id)">Edit</a></td>
                <td>@row.Id</td>
                <td>@row.FName</td>
                <td>@row.LName</td>
