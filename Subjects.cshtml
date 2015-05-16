@@ -16,7 +16,7 @@
     </head>
     <body>
       <h3>Subjects</h3>
-      <a href="~/InsertSubject">Add New Subject</a>
+      <a href="~/InsertSubject"><button>Add New Subject</button></a>
       <br><br>
    <table>
        <thead>
@@ -35,13 +35,13 @@
                <th>User Defined 1</th>
                <th>User Defined 2</th>
                <th>User Defined 3</th>
-
+               <th> </th>
            </tr>
        </thead>
        <tbody>
            @foreach(var row in db.Query(selectQueryString)){
             <tr>
-               <td><a href="@Href("UpdateSubject", row.Id)">Edit</a></td>
+               <td><a href="@Href("UpdateSubject", row.Id)"><button>Edit</button></a></td>
                <td>@row.Id</td>
                <td>@row.FName</td>
                <td>@row.LName</td>
@@ -55,7 +55,7 @@
                <td>@row.UserDefined1</td>
                <td>@row.UserDefined2</td>
                <td>@row.UserDefined3</td>
-
+               <td><a href="@Href("~/DeleteSubject", row.Id)"><button>Delete</button></a></td>
             </tr>
            }
        </tbody>
