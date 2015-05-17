@@ -22,7 +22,7 @@ Layout = "~/Shared/_Layout.cshtml";
 	</head>
 	<body>
 	  <h3>Subject Notes for @Subject.FName @Subject.LName</h3>
-		<a href="~/InsertNote"><button>Add New Note</button></a>
+		<a href="@Href("InsertNote", SubjectId)"><button>Add Note</button></a>
 		<br><br>
 		<table>
 		   <thead>

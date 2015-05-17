@@ -1,0 +1,58 @@
+﻿@{
+    
+Layout = "~/Shared/_Layout.cshtml";
+    
+    var db = Database.Open("Main");
+    var SubjectId = UrlData[0];
+	var CreatedBy = Request.Form["CreatedBy"];
+	var CreationDate=DateTime.Now;
+    var Note = Request.Form["Note"];
+
+	if (IsPost) {
+        if(ModelState.IsValid) {
+            var insertQuery = "INSERT INTO SubjectNote (SubjectID, CreatedBy, CreationDate, Note) VALUES (@0, @1, @2, @3)";
+            db.Execute(insertQuery, SubjectId, CreatedBy, CreationDate, Note);
+            Response.Redirect("~/Subjects");
+        }
+	}
+}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+		<title>Add Subject Note</title>
+		<style type="text/css">
+            label {float:left; width: 8em; text-align: right;
+            margin-right: 0.5em;}
+            fieldset {padding: 1em; border: 1px solid; width: "80%";}
+            legend {padding: 2px 4px; border: 1px solid; font-weight:bold;}
+        </style>
+	</head>
+
+    <body>
+        subjectID = @SubjectId<br>
+		@CreationDate
+		<br>
+         <form method="post" action="">
+           <fieldset>
+             <legend>Add Note</legend>
+               <div>
+               <label>Created By:</label>
+               <input name="CreatedBy" type="text" size="100" />
+             </div>
+             <div>
+				<label>Note:</label>
+				<textarea name="Note" rows="20" cols="500">gggg</textarea>
+             </div>
+			  <div>
+				<label>&nbsp;</label>
+				<br>
+				<input type="submit" value="Add" class="submit" />
+             </div>
+           </fieldset>
+         </form>
+
+
+    </body>
+</html>
