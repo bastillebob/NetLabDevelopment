@@ -1,9 +1,14 @@
 ﻿ @{  Layout = "~/Shared/_Layout.cshtml";
 
-    var db = Database.Open("Main") ; 
-    var selectQueryString = "SELECT * FROM Setting WHERE Id=1"; 
-    var data = db.Query(selectQueryString); 
-
+	var db1 = Database.Open("Main") ; 
+	var QueryString1 = "SELECT ExperimentDatabaseName FROM Setting WHERE Id=1"; 
+	var dbname = db1.QueryValue(QueryString1);
+	}
+@{
+	var db2 = Database.Open(dbname) ; 
+	var QueryString2 = "SELECT * FROM Dummy2Table1"; 
+	var data = db2.Query(QueryString2); 
+	var grid = new WebGrid(data);
 }
 
 <!DOCTYPE html>
@@ -15,23 +20,8 @@
     </head>
     <body>
       <h3>Data</h3>
-   <table>
-       <thead>
-           <tr>
-               <th></th>
-               <th>Name</th>
-               <th>Value</th>
-            </tr>
-       </thead>
-       <tbody>
-			@foreach(var row in db.Query(selectQueryString)){
-				<tr>
-				   <td>@row.ExperimentName</td>
-				   <td>@row.ExperimentDatabaseName</td>
-				   <td>@row.ExperimentURL</td>
-				</tr>
-			}
-       </tbody>
-   </table>
+<div id="grid"> 
+@grid.GetHtml()
+</div> 
     </body>
 </html>

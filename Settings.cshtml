@@ -33,16 +33,17 @@
 	  <style type="text/css">
 		 label { float: left; width: 8em; text-align: right;
 				 margin-right: 0.5em;}
-		 fieldset { padding: 1em; border: 1px solid; width: 35em;}
+		 fieldset { padding: 1em; border: 1px solid; width: auto;}
 		 legend { padding: 2px 4px;  border: 1px solid; font-weight: bold;}
 	  </style>
 	</head>
 	<body>
+		@{EXEC sp_tables ;}
 		<h3>Settings</h3>
 		<form method="post" action="">
 			<fieldset>
 				<div>
-					<label>Experiment Name:</label>
+					<label width ="100">Experiment Name:</label>
 					<input name="ExperimentName" type="text" size="50" value="@ExperimentName" />
 				</div>
 				<br>
