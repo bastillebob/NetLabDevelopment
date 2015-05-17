@@ -1,0 +1,67 @@
+﻿@{
+  
+    Layout = "~/Shared/_Layout.cshtml";
+    
+    var CreatedBy = "";
+    var Note = "";
+
+
+    var NoteID  = UrlData[0];
+
+    if (NoteID.IsEmpty()) {
+         Response.Redirect("~/Subjects");
+    }
+
+    var db = Database.Open("Main");
+
+    if (IsPost) {
+        var updateQueryString = "UPDATE SubjectNote SET CreatedBy=@0, Note=@1 WHERE Id=@2" ;
+        CreatedBy = Request["CreatedBy"];
+        Note = Request["Note"];
+        db.Execute(updateQueryString, CreatedBy, Note, NoteID);
+        Response.Redirect(@Href("~/Subjects"));
+    }
+    else {
+        var selectQueryString = "SELECT * FROM SubjectNote WHERE Id=@0";
+
+        var row = db.QuerySingle(selectQueryString, NoteID);
+        CreatedBy = row.CreatedBy;
+        Note = row.Note;
+     }
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Subjects</title>
+  <style type="text/css">
+     label { float: left; width: 8em; text-align: right;
+             margin-right: 0.5em;}
+     fieldset { padding: 1em; border: 1px solid; width: 35em;}
+     legend { padding: 2px 4px;  border: 1px solid; font-weight: bold;}
+  </style>
+</head>
+<body>
+  <h3>Subject Notes</h3>
+   <form method="post" action="">
+     <fieldset>
+       <legend>Edit Note</legend>
+             <div>
+               <label>Created By:</label>
+               <input name="CreatedBy" type="text" size="50" value="@CreatedBy" />
+             </div>
+             <div>
+               <label>Note:</label>
+				 <textarea name="Note" rows="20" cols="500">@Note</textarea>
+
+             </div>
+             <div>
+       <div>
+          <label>&nbsp;</label><br>
+          <input type="submit" value="Update" class="submit" />
+       </div>
+    </fieldset>
+  </form>
+</body>
+</html>

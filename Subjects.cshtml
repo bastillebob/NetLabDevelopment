@@ -2,7 +2,7 @@
     Layout = "~/Shared/_Layout.cshtml";
 
     var db = Database.Open("Main") ; 
-    var selectQueryString = "SELECT * FROM Subject"; 
+    var selectQueryString = "SELECT * FROM Subject ORDER BY LName"; 
     var data = db.Query(selectQueryString); 
 
 }

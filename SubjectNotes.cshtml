@@ -37,7 +37,7 @@ Layout = "~/Shared/_Layout.cshtml";
 				@foreach(var row in db.Query(SelectQueryString, SubjectId)){
 					<tr>
 						<td><a href="@Href("UpdateNote", row.Id)"><button>Edit</button></a></td>
-						<td><a href="@Href("DeleteNote", row.Id)"><button>Delete</button></a></td>
+						<td><a href="@Href("DeleteSubjectNote", row.Id)"><button>Delete</button></a></td>
 						<td width="15%'">@row.CreationDate</td>
 						<td width="15%">@row.CreatedBy</td>
 						<td>@row.Note</td>
