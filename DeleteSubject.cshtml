@@ -4,63 +4,53 @@ Layout = "~/Shared/_Layout.cshtml";
     
     var db = Database.Open("Main");
     var SubjectId = UrlData[0];
-
-    if (SubjectId.IsEmpty()) {
+	if (SubjectId.IsEmpty()) {
         Response.Redirect("~/Subjects");
     }
 
-    var Subject = db.QuerySingle("SELECT * FROM Subject WHERE ID = @0", SubjectId);
-  
+	var Subj = db.QuerySingle("SELECT * FROM Subject WHERE Id = @0", SubjectId);
 	if( IsPost && !SubjectId.IsEmpty()) {
-
 		var deleteQueryString = "DELETE FROM Subject WHERE Id=@0";
 		db.Execute(deleteQueryString, SubjectId);
-
 		Response.Redirect("~/Subjects");
-		}
+  }
+ 
 }
 
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Delete Subject</title>
-	subjectID=@SubjectId
-        <style>
-            table {
-                border-collapse: collapse;
-            }
+	<head>
+		<title>Delete Subject</title>
+			<style>
+				table {
+					border-collapse: collapse;
+				}
+				table, td, th {
+					border: none;
+				}
+			</style>
+	</head>
 
-            table, td, th {
-                border: none;
-            }
-        </style>
-</head>
-<body>
-  <h3>Subjects</h3>
-  <form method="post" action="" name="form">
-    <p><font color="red">Are you sure you want to delete this subject?</font></p>
-      <br>
-      <table width="600" border="0">
-          <tr>
-              <td><a href="~/Subjects"><button>Cancel</button></a></td>
-              <td><input type="submit" value="Delete" /></td>
-          </tr>
-      </table>
-      
+	<body>
+	  <h3>Subjects</h3>
+	  <form method="post" action="" name="form">
+		<p><font color="red">Are you sure you want to delete this subject?</font></p>
+		  <br>
+		  <input type="submit" value="Delete" /></td>
 
-    <p> ID: @Subject.ID <br />
-        First Name: @Subject.FName <br />
-        Last Name: @Subject.LName <br />
-        Age: @Subject.Age <br />
-        Gender: @Subject.Gender <br />
-        Email: @Subject.Email <br />
-        Race: @Subject.Race <br />
-        Country: @Subject.Country <br />
-        State/Province: @Subject.StateProvince <br />
-        User Defined 1: @Subject.UserDefined1 <br />
-        User Defined 2: @Subject.UserDefined2 <br />
-        User Defined 3: @Subject.UserDefined3 <br />
+		<p> ID: @Subj.ID <br />
+			First Name: @Subj.FName <br />
+			Last Name: @Subj.LName <br />
+			Age: @Subj.Age <br />
+			Gender: @Subj.Gender <br />
+			Email: @Subj.Email <br />
+			Race: @Subj.Race <br />
+			Country: @Subj.Country <br />
+			State/Province: @Subj.StateProvince <br />
+			User Defined 1: @Subj.UserDefined1 <br />
+			User Defined 2: @Subj.UserDefined2 <br />
+			User Defined 3: @Subj.UserDefined3 <br />
 
-     </form>
-</body>
+		 </form>
+	</body>
 </html>
