@@ -1,5 +1,9 @@
-﻿@{
-    Layout = "~/Shared/_Layout.cshtml";
+﻿ @{  Layout = "~/Shared/_Layout.cshtml";
+
+    var db = Database.Open("Main") ; 
+    var selectQueryString = "SELECT * FROM Setting WHERE Id=1"; 
+    var data = db.Query(selectQueryString); 
+
 }
 
 <!DOCTYPE html>
@@ -7,9 +11,27 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title></title>
+        <title>Data</title>
     </head>
     <body>
-        Data
+      <h3>Data</h3>
+   <table>
+       <thead>
+           <tr>
+               <th></th>
+               <th>Name</th>
+               <th>Value</th>
+            </tr>
+       </thead>
+       <tbody>
+			@foreach(var row in db.Query(selectQueryString)){
+				<tr>
+				   <td>@row.ExperimentName</td>
+				   <td>@row.ExperimentDatabaseName</td>
+				   <td>@row.ExperimentURL</td>
+				</tr>
+			}
+       </tbody>
+   </table>
     </body>
 </html>

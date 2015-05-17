@@ -1,40 +1,66 @@
-﻿ @{  Layout = "~/Shared/_Layout.cshtml";
+﻿@{
+  
+    Layout = "~/Shared/_Layout.cshtml";
+    
+    var ExperimentName = "";
+    var ExperimentDatabaseName = "";
+	var ExperimentURL = "";
+	var SettingID=1;
+    var db = Database.Open("Main");
 
-    var db = Database.Open("Main") ; 
-    var selectQueryString = "SELECT * FROM Setting"; 
-    var data = db.Query(selectQueryString); 
+    if (IsPost) {
+        var updateQueryString = "UPDATE Setting SET ExperimentName=@0, ExperimentDatabaseName=@1, ExperimentURL=@2 WHERE Id=@3" ;
+        ExperimentName = Request["ExperimentName"];
+        ExperimentDatabaseName = Request["ExperimentDatabaseName"];
+		ExperimentURL = Request["ExperimentURL"];
+        db.Execute(updateQueryString, ExperimentName, ExperimentDatabaseName, ExperimentURL, SettingID);
+        Response.Redirect(@Href("~/Default"));
+    }
+    else {
+        var selectQueryString = "SELECT * FROM Setting WHERE Id=1";
+        var row = db.QuerySingle(selectQueryString);
+        ExperimentName = row.ExperimentName;
+        ExperimentDatabaseName = row.ExperimentDatabaseName;
+		ExperimentURL = row.ExperimentURL;
+     }
 
 }
 
 <!DOCTYPE html>
-
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title></title>
-    </head>
-    <body>
-      <h3>Settings</h3>
-   <table>
-       <thead>
-           <tr>
-               <th>ID</th>
-               <th>Name</th>
-               <th>Value</th>
-            </tr>
-       </thead>
-       <tbody>
-           @foreach(var row in db.Query(selectQueryString)){
-            <tr>
-               <td>@row.Id</td>
-               <td>@row.Name</td>
-               <td>@row.Value</td>
-            </tr>
-           }
-       </tbody>
-   </table>
-
-
-
-    </body>
-</html>
+<html>
+	<head>
+	  <title>Settings</title>
+	  <style type="text/css">
+		 label { float: left; width: 8em; text-align: right;
+				 margin-right: 0.5em;}
+		 fieldset { padding: 1em; border: 1px solid; width: 35em;}
+		 legend { padding: 2px 4px;  border: 1px solid; font-weight: bold;}
+	  </style>
+	</head>
+	<body>
+		<h3>Settings</h3>
+		<form method="post" action="">
+			<fieldset>
+				<div>
+					<label>Experiment Name:</label>
+					<input name="ExperimentName" type="text" size="50" value="@ExperimentName" />
+				</div>
+				<br>
+				<div>
+					<label>Experiment Database Name:</label>
+					<input name="ExperimentDatabaseName" type="text" size="50" value="@ExperimentDatabaseName" />
+				</div>
+				<br>
+				<div>
+					<label>Experiment URL:</label>
+					<input name="ExperimentURL" type="text" size="100" value="@ExperimentURL" />
+				</div>
+				<br>
+				<div>
+					<label>&nbsp;</label><br>
+					<input type="submit" value="Update" class="submit" />
+				</div>
+			</fieldset>
+		</form>
+	</body>
+	</html>
