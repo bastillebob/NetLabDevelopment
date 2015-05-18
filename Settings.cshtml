@@ -5,15 +5,35 @@
     var ExperimentName = "";
     var ExperimentDatabaseName = "";
 	var ExperimentURL = "";
+	var Table1Name = "";
+	var Table2Name = "";
+	var Table3Name = "";
+	var Table4Name = "";
+	var Table5Name = "";
+	var Table6Name = "";
+	var Table7Name = "";
+	var Table8Name = "";
+	var Table9Name = "";
+	var Table10Name = "";
 	var SettingID=1;
     var db = Database.Open("Main");
 
     if (IsPost) {
-        var updateQueryString = "UPDATE Setting SET ExperimentName=@0, ExperimentDatabaseName=@1, ExperimentURL=@2 WHERE Id=@3" ;
+        var updateQueryString = "UPDATE Setting SET ExperimentName=@0, ExperimentDatabaseName=@1, ExperimentURL=@2, Table1Name=@3, Table2Name=@4, Table3Name=@5, Table4Name=@6, Table5Name=@7, Table6Name=@8, Table7Name=@9, Table8Name=@10, Table9Name=@11, Table10Name=@12 WHERE Id=@13" ;
         ExperimentName = Request["ExperimentName"];
         ExperimentDatabaseName = Request["ExperimentDatabaseName"];
 		ExperimentURL = Request["ExperimentURL"];
-        db.Execute(updateQueryString, ExperimentName, ExperimentDatabaseName, ExperimentURL, SettingID);
+		Table1Name = Request["Table1Name"];
+		Table2Name = Request["Table2Name"];
+		Table3Name = Request["Table3Name"];
+		Table4Name = Request["Table4Name"];
+		Table5Name = Request["Table5Name"];
+		Table6Name = Request["Table6Name"];
+		Table7Name = Request["Table7Name"];
+		Table8Name = Request["Table8Name"];
+		Table9Name = Request["Table9Name"];
+		Table10Name = Request["Table10Name"];
+        db.Execute(updateQueryString, ExperimentName, ExperimentDatabaseName, ExperimentURL, Table1Name, Table2Name, Table3Name, Table4Name, Table5Name, Table6Name, Table7Name, Table8Name, Table9Name, Table10Name, SettingID);
         Response.Redirect(@Href("~/Default"));
     }
     else {
@@ -22,6 +42,16 @@
         ExperimentName = row.ExperimentName;
         ExperimentDatabaseName = row.ExperimentDatabaseName;
 		ExperimentURL = row.ExperimentURL;
+		Table1Name = row.Table1Name;
+		Table2Name = row.Table2Name;
+		Table3Name = row.Table3Name;
+		Table4Name = row.Table4Name;
+		Table5Name = row.Table5Name;
+		Table6Name = row.Table6Name;
+		Table7Name = row.Table7Name;
+		Table8Name = row.Table8Name;
+		Table9Name = row.Table9Name;
+		Table10Name = row.Table10Name;
      }
 
 }
@@ -38,7 +68,6 @@
 	  </style>
 	</head>
 	<body>
-		@{EXEC sp_tables ;}
 		<h3>Settings</h3>
 		<form method="post" action="">
 			<fieldset>
@@ -57,6 +86,55 @@
 					<input name="ExperimentURL" type="text" size="100" value="@ExperimentURL" />
 				</div>
 				<br>
+				<div>
+					<label>Table 1 Name:</label>
+					<input name="Table1Name" type="text" size="50" value="@Table1Name" />
+				</div>
+				<br>
+				<div>
+					<label>Table 2 Name:</label>
+					<input name="Table2Name" type="text" size="50" value="@Table2Name" />
+				</div>
+				<br>
+				<div>
+					<label>Table 3 Name:</label>
+					<input name="Table3Name" type="text" size="50" value="@Table3Name" />
+				</div>
+				<br>
+				<div>
+					<label>Table 4 Name:</label>
+					<input name="Table4Name" type="text" size="50" value="@Table4Name" />
+				</div>
+				<br>
+				<div>
+					<label>Table 5 Name:</label>
+					<input name="Table5Name" type="text" size="50" value="@Table5Name" />
+				</div>
+				<br>
+				<div>
+					<label>Table 6 Name:</label>
+					<input name="Table6Name" type="text" size="50" value="@Table6Name" />
+				</div>
+				<br>
+				<div>
+					<label>Table 7 Name:</label>
+					<input name="Table7Name" type="text" size="50" value="@Table7Name" />
+				</div>
+				<br>
+				<div>
+					<label>Table 8 Name:</label>
+					<input name="Table8Name" type="text" size="50" value="@Table8Name" />
+				</div>
+				<br>
+				<div>
+					<label>Table 9 Name:</label>
+					<input name="Table9Name" type="text" size="50" value="@Table9Name" />
+				</div>
+				<br>
+				<div>
+					<label>Table 10 Name:</label>
+					<input name="Table10Name" type="text" size="50" value="@Table10Name" />
+				</div>
 				<div>
 					<label>&nbsp;</label><br>
 					<input type="submit" value="Update" class="submit" />

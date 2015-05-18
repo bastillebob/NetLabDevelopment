@@ -3,13 +3,41 @@
 	var db1 = Database.Open("Main") ; 
 	var QueryString1 = "SELECT ExperimentDatabaseName FROM Setting WHERE Id=1"; 
 	var dbname = db1.QueryValue(QueryString1);
-	}
-@{
-	var db2 = Database.Open(dbname) ; 
-	var QueryString2 = "SELECT * FROM Dummy2Table1"; 
-	var data = db2.Query(QueryString2); 
+
+	@* The above code does work, dbname is pulled from the settings table.
+	But, the code below hard codes table names because I couldn't figure out how to dynamically get them from dbname 
+	due to the fact that I stink.*@
+	
+	var Table1NameQuery = "SELECT Table1Name FROM Setting WHERE Id=1";
+	var Table1Name = db1.QueryValue(Table1NameQuery);
+	var Table2NameQuery = "SELECT Table2Name FROM Setting WHERE Id=1";
+	var Table2Name = db1.QueryValue(Table2NameQuery);
+	var Table3NameQuery = "SELECT Table3Name FROM Setting WHERE Id=1";
+	var Table3Name = db1.QueryValue(Table3NameQuery);
+	var Table4NameQuery = "SELECT Table4Name FROM Setting WHERE Id=1";
+	var Table4Name = db1.QueryValue(Table4NameQuery);
+	var Table5NameQuery = "SELECT Table5Name FROM Setting WHERE Id=1";
+	var Table5Name = db1.QueryValue(Table5NameQuery);
+	var Table6NameQuery = "SELECT Table6Name FROM Setting WHERE Id=1";
+	var Table6Name = db1.QueryValue(Table6NameQuery);
+	var Table7NameQuery = "SELECT Table7Name FROM Setting WHERE Id=1";
+	var Table7Name = db1.QueryValue(Table7NameQuery);
+	var Table8NameQuery = "SELECT Table8Name FROM Setting WHERE Id=1";
+	var Table8Name = db1.QueryValue(Table8NameQuery);
+	var Table9NameQuery = "SELECT Table9Name FROM Setting WHERE Id=1";
+	var Table9Name = db1.QueryValue(Table9NameQuery);
+	var Table10NameQuery = "SELECT Table10Name FROM Setting WHERE Id=1";
+	var Table10Name = db1.QueryValue(Table10NameQuery);
+
+	var TableChoice = Request["TableChoice"];
+	var db2 = Database.Open(dbname); 
+	var QueryString2 = "SELECT * FROM @0";
+
+	var data = db2.Query(QueryString2, TableChoice);
 	var grid = new WebGrid(data);
+
 }
+
 
 <!DOCTYPE html>
 
@@ -19,9 +47,19 @@
         <title>Data</title>
     </head>
     <body>
-      <h3>Data</h3>
-<div id="grid"> 
-@grid.GetHtml()
-</div> 
-    </body>
+		<h3>Data</h3>
+		Select Table:
+		<select name="TableChoice"> 
+			<option value="@Table1Name" >@Table1Name</option>
+			<option value="@Table2Name" >@Table2Name</option>
+			<option value="@Table3Name" >@Table3Name</option>
+			<option value="@Table4Name" >@Table4Name</option>
+			<option value="@Table5Name" >@Table5Name</option>
+			<option value="@Table6Name" >@Table6Name</option>
+			<option value="@Table7Name" >@Table7Name</option>
+			<option value="@Table8Name" >@Table8Name</option>
+			<option value="@Table9Name" >@Table9Name</option>
+			<option value="@Table10Name" >@Table10Name</option>
+		</select>
+	</body>
 </html>
