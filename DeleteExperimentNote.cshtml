@@ -1,0 +1,48 @@
+﻿@{
+    
+Layout = "~/Shared/_Layout.cshtml";
+    
+    var db = Database.Open("Main");
+    var NoteId = UrlData[0];
+	if (NoteId.IsEmpty()) {
+        Response.Redirect("~/Experiments");
+    }
+
+	var Note = db.QuerySingle("SELECT * FROM ExperimentNote WHERE Id = @0", NoteId);
+	if( IsPost && !NoteId.IsEmpty()) {
+		var deleteQueryString = "DELETE FROM ExperimentNote WHERE Id=@0";
+		db.Execute(deleteQueryString, NoteId);
+		Response.Redirect("~/Experiments");
+  }
+ 
+}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Delete Experiment Note</title>
+			<style>
+				table {
+					border-collapse: collapse;
+				}
+				table, td, th {
+					border: none;
+				}
+			</style>
+	</head>
+
+	<body>
+	  <h3>Experiment Notes</h3>
+	  <form method="post" action="" name="form">
+		<p><font color="red">Are you sure you want to delete this note?</font></p>
+		  <br>
+		  <input type="submit" value="Delete" /></td>
+			<table>
+				<tr><td>ID: @Note.ID</td></tr>
+				<tr><td>Created By: @Note.CreatedBy</td></tr>
+				<tr><td>Creation Date: @Note.CreationDate</td></tr>
+				<tr><td>Note: @Note.Note</td></tr>
+			</table>
+		</form>
+	</body>
+</html>

@@ -1,0 +1,49 @@
+﻿@{
+    
+Layout = "~/Shared/_Layout.cshtml";
+    
+    var db = Database.Open("Main");
+    var ExperimentId = UrlData[0];
+
+	var SelectQueryString = "SELECT * FROM ExperimentNote WHERE ExperimentID=@0";
+	db.Execute(SelectQueryString, ExperimentId);
+	
+	var Experiment = db.QuerySingle("SELECT * FROM Experiment WHERE ID = @0", ExperimentId);
+		
+}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			<link rel="stylesheet" type="text/css" href="_Style.css">
+		</style>
+		<title>Experiment Notes</title>
+	</head>
+	<body>
+	  <h3>Experiment Notes for @Experiment.Name</h3>
+		<a href="@Href("InsertExperimentNote", ExperimentId)"><button>Add Note</button></a>
+		<br><br>
+		<table>
+		   <thead>
+			   <tr align="left">
+				   <th> </th>
+				   <th> </th>
+				   <th>Created On</th>
+				   <th>Created By</th>
+				   <th>Note</th>
+			</thead>
+			<tbody>
+				@foreach(var row in db.Query(SelectQueryString, ExperimentId)){
+					<tr>
+						<td><a href="@Href("UpdateExperimentNote", row.Id)"><button>Edit</button></a></td>
+						<td><a href="@Href("DeleteExperimentNote", row.Id)"><button>Delete</button></a></td>
+						<td width="15%'">@row.CreationDate</td>
+						<td width="15%">@row.CreatedBy</td>
+						<td>@row.Note</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</body>
+</html>

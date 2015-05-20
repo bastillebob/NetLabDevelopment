@@ -1,0 +1,29 @@
+﻿@{
+	
+	Layout = "~/Shared/_Layout.cshtml";
+
+    var RunNum = UrlData[0];
+
+	var db = Database.Open("Main");
+	var SelectQueryString = "SELECT Id, FName, LName FROM Subject JOIN SubjectRunJoin ON Id = SubjectID";
+	var Subjects = db.Query(SelectQueryString);
+   
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Run Subjects</title>
+    </head>
+    <body>
+     <table> 
+		@foreach(var row in Subjects){
+			<tr> 
+				<td>@row.FName</td> 
+			</tr> 
+		}
+</table> 
+    </body>
+</html>

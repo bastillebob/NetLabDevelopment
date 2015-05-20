@@ -42,7 +42,6 @@
     }
     else {
         var selectQueryString = "SELECT * FROM Subject WHERE Id=@0";
-
         var row = db.QuerySingle(selectQueryString, SubjectID);
         FName = row.FName;
         LName = row.LName;

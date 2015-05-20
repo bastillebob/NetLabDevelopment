@@ -1,0 +1,43 @@
+﻿@{
+    
+Layout = "~/Shared/_Layout.cshtml";
+    
+    var db = Database.Open("Main");
+    var ExperimentId = UrlData[0];
+	var ExperimentName = UrlData[1];
+
+	var SelectQueryString = "SELECT * FROM Run WHERE ExperimentID=@0";
+	db.Execute(SelectQueryString, ExperimentId);
+
+		
+}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			<link rel="stylesheet" type="text/css" href="_Style.css">
+		</style>
+		<title>Experiment Runs</title>
+	</head>
+	<body>
+	 <h3>Runs for @ExperimentName</h3>
+		<br>
+		<table>
+		   <thead>
+			   <tr align="left">
+				   <th>Experiment ID</th>
+				   <th>Date/Time</th>
+			</thead>
+			<tbody>
+				@foreach(var row in db.Query(SelectQueryString, ExperimentId)){
+					<tr>
+						<td><a href="@Href("RunSubjects", row.Id)"><button>Subjects</button></a></td>
+						<td width="15%'">@row.ExperimentID</td>
+						<td width="15%">@row.DateTime</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</body>
+</html>

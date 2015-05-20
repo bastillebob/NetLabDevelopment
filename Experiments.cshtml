@@ -1,4 +1,5 @@
-﻿ @{  Layout = "~/Shared/_Layout.cshtml";
+﻿@{
+    Layout = "~/Shared/_Layout.cshtml";
 
     var db = Database.Open("Main") ; 
     var selectQueryString = "SELECT * FROM Experiment"; 
@@ -11,34 +12,31 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title></title>
+		<link rel="stylesheet" type="text/css" href="_Style.css">
+        <title>Experiments</title>
     </head>
     <body>
       <h3>Experiments</h3>
+       <br>
    <table>
        <thead>
            <tr>
-               <th>ID</th>
-               <th>Name</th>
-               <th>Author</th>
-               <th>Created</th>
-               <th>Description</th>
+			   <th> </th>
+			   <th> </th>
+               <th>Experiment ID</th>
+			   <th>Name</th>
            </tr>
        </thead>
        <tbody>
            @foreach(var row in db.Query(selectQueryString)){
             <tr>
-               <td>@row.Id</td>
-               <td>@row.Name</td>
-               <td>@row.Author</td>
-               <td>@row.CreationDate</td>
-               <td>@row.Description</td>
+				<td><a href="@Href("ExperimentNotes", row.Id)"><button>Notes</button></a></td>
+				<td><a href="@Href("Runs", row.Id, row.Name)"><button>Runs</button></a></td>
+				<td>@row.Id</td>
+				<td>@row.Name</td>
             </tr>
            }
        </tbody>
-   </table>
-
-
-
+	</table>
     </body>
 </html>
