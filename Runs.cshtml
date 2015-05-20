@@ -32,7 +32,7 @@ Layout = "~/Shared/_Layout.cshtml";
 			<tbody>
 				@foreach(var row in db.Query(SelectQueryString, ExperimentId)){
 					<tr>
-						<td><a href="@Href("RunSubjects", row.Id)"><button>Subjects</button></a></td>
+						<td><a href="@Href("RunSubjects?ID=row.Id")"><button>Subjects</button></a></td>
 						<td width="15%'">@row.ExperimentID</td>
 						<td width="15%">@row.DateTime</td>
 					</tr>
